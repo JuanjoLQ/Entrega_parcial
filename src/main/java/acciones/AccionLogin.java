@@ -1,15 +1,20 @@
 package acciones;
 
 import java.io.IOException;
+import java.util.ArrayList;
 import java.util.Hashtable;
 
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import pojos.Factura;
 import pojos.Usuario;
 
 public class AccionLogin extends Accion{
+
+	private ArrayList<Factura> facturasUsuario = null;
+
 
 	public AccionLogin() {
 		// TODO Auto-generated constructor stub
@@ -20,7 +25,12 @@ public class AccionLogin extends Accion{
 		
 		
 		String user = (String) request.getParameter("USERNAME");
-		String contrasena = (String) request.getParameter("PASS");
+		String pass = (String) request.getParameter("PASS");
+		//Si no hay nada debajo maldecir a ECLIPSE :)
+		if(user == null){
+			return "login.jsp";
+		}
+		
 		
 		Hashtable<String, Usuario> usuarios = (Hashtable<String, Usuario>) request.getServletContext().getAttribute("USUARIOS");
 		
@@ -28,10 +38,19 @@ public class AccionLogin extends Accion{
 			
 			Usuario usuario = usuarios.get(user);
 			
-			if(usuario.getPass().equals(contrasena)){
-				request.getSession().setAttribute("USUARIO", new Usuario(user, contrasena));
-				return "crud.jsp";
+			if(usuario.getPass().equals(pass)){
 				
+				Hashtable<String, ArrayList<Factura>> facturasGlobales = (Hashtable<String, ArrayList<Factura>>) request.getServletContext().getAttribute("FACTURAS");
+				
+				this.facturasUsuario = facturasGlobales.get(user);
+				
+				if(facturasUsuario == null) {
+					request.getSession().setAttribute("FACTURASUSUARIO", this.facturasUsuario);
+				}
+				
+				request.getSession().setAttribute("USUARIO", new Usuario(user, pass));
+				request.getSession().setAttribute("ISADMIN", usuario.getAdmin());
+				return "crudProductos.jsp";
 			}
 			else {
 				return "login.jsp";

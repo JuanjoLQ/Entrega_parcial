@@ -4,11 +4,15 @@ package servlets;
 import java.io.IOException;
 import java.util.Hashtable;
 
+import javax.security.auth.message.callback.PrivateKeyCallback.Request;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.websocket.Session;
+
+import org.apache.tomcat.util.http.fileupload.RequestContext;
 
 import acciones.Accion;
 import acciones.AccionBorrar;
@@ -17,6 +21,7 @@ import acciones.AccionNuevo;
 import acciones.AccionUpdate;
 import pojos.Producto;
 import pojos.Usuario;
+import pojos.Factura;
 
 /**
  * Servlet implementation class Control
@@ -25,7 +30,6 @@ import pojos.Usuario;
 public class Control extends HttpServlet {
 	private static final long serialVersionUID = 1L;
 	private Hashtable<String, Accion> acciones = null;
-	
     /**
      * @see HttpServlet#HttpServlet()
      */
@@ -36,7 +40,6 @@ public class Control extends HttpServlet {
     
     public void init() throws ServletException {
     	this.acciones = (Hashtable<String, Accion>) this.getServletContext().getAttribute("ACCIONES");
-    	
     	super.init();
     }
 
@@ -53,7 +56,10 @@ public class Control extends HttpServlet {
 		
 		if(usuario != null) {
 			
+			System.out.println(parameterAccion);
+			
 			Accion accion = this.acciones.get(parameterAccion);
+			
 			if(accion != null) {
 				jsp += accion.ejecutar(request, response);
 				
@@ -70,7 +76,6 @@ public class Control extends HttpServlet {
 
 				jsp += "login.jsp";
 			}
-			
 			
 		}
 		System.out.println(jsp);

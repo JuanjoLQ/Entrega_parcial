@@ -7,31 +7,44 @@
 <html>
 <head>
 <meta charset="ISO-8859-1">
-<title>Insert title here</title>
+<title>Productos</title>
 </head>
 <body>
-estas en el crud
-<br>
+    
+Estas en el CRUD de productos.
 
-<form action="Control" method="post">
+<br><form action="Control" method="post">
 
 	<input type = "hidden" name="IDACCION" value="NEW">
 	Id del producto: <input type="text" name="NEWID">
 	Nombre del producto: <input type="text" name="NEWNAME">
 	<input type ="submit" value ="Crear">
-</form>
-
-<br>
-<br>
-
-
+</form><br><br>
 
 <%
 
+Boolean isAdmin = (Boolean) request.getSession().getAttribute("ISADMIN");
+String botonUsuarios, botonFacturas;
+if(isAdmin){
+	botonUsuarios = "<form action = \"Control\" method = \"post\">" + 
+    		"<input type = \"hidden\" name=\"IDACCION\" value=\"USUARIOS\">" +
+			"<input type = \"submit\" value = \"Ir a Usuarios\">" +
+			"</form>";
+	out.println(botonUsuarios + "<br>");
+	
+	botonFacturas = "<form action = \"Control\" method = \"post\">" + 
+    		"<input type = \"hidden\" name=\"IDACCION\" value=\"FACTURAS\">" +
+			"<input type = \"submit\" value = \"Ir a Facturas\">" +
+			"</form>";
+	out.println(botonFacturas + "<br>");
+}
+
 String msg = (String) request.getSession().getAttribute("MSG");
-if(msg != null){
+
+if((msg != null)){
 	out.println(msg + "<br><br>");
 }
+
 //Usuario usuario = (Usuario) request.getSession().getAttribute("USUARIO");
 String mod = "";
 String del = "";
@@ -66,15 +79,6 @@ out.println("<form method = \"GET\" action = \"HTMLBank\">" +
     			"<input type = \"submit\" value = \"Modificar\">" +
     			"</form>");
 */
-
-
-
-
-
-
-
-
-
 
 %>
 
