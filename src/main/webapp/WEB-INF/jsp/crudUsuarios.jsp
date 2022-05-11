@@ -32,12 +32,13 @@ if(isAdmin){
 			"</form>";
 	out.println(botonProductos + "<br>");
 	
-	botonFacturas = "<form action = \"Control\" method = \"post\">" + 
+}
+
+botonFacturas = "<form action = \"Control\" method = \"post\">" + 
     		"<input type = \"hidden\" name=\"IDACCION\" value=\"FACTURAS\">" +
 			"<input type = \"submit\" value = \"Ir a Facturas\">" +
 			"</form>";
 	out.println(botonFacturas + "<br>");
-}
 
 String msg = (String) request.getSession().getAttribute("MSG");
 
@@ -81,12 +82,6 @@ out.println("<form method = \"GET\" action = \"HTMLBank\">" +
 */
 
 %>
-
-
-
-
-
-
 
 </body>
 </html>

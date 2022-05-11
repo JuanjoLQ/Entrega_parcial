@@ -24,36 +24,36 @@ if(isAdmin){
 			"<input type = \"submit\" value = \"Ir a Usuarios\">" +
 			"</form>";
 	out.println(botonUsuarios + "<br>");
-	
-	botonProductos = "<form action = \"Control\" method = \"post\">" + 
-    		"<input type = \"hidden\" name=\"IDACCION\" value=\"PRODUCTOS\">" +
-			"<input type = \"submit\" value = \"Ir a Productos\">" +
-			"</form>";
-	out.println(botonProductos + "<br>");
-	
-}
+}	
+botonProductos = "<form action = \"Control\" method = \"post\">" + 
+   		"<input type = \"hidden\" name=\"IDACCION\" value=\"PRODUCTOS\">" +
+		"<input type = \"submit\" value = \"Ir a Productos\">" +
+		"</form>";
+out.println(botonProductos + "<br>");
+
+
 
 Hashtable<String, Producto> productos = (Hashtable<String, Producto>) request.getServletContext().getAttribute("PRODUCTOS");
 Enumeration productoEnumeration = productos.elements();
+
+Hashtable<String, Usuario> usuarios = (Hashtable<String, Usuario>) request.getServletContext().getAttribute("USUARIOS");
+Enumeration usuarioEnumeration = usuarios.elements();
 %>
 
-<br><h1>Crear factura</h1><br>
+<br><h2>Crear factura</h2><br>
 
-</form>
-	<input type = "hidden" name="IDACCION" value="UPDATEFACTURA">
-	Añadir producto al pedido: <label for="CREATEFACTURA">
+<form action = "Control" method = "post">
+	<input type = "hidden" name="IDACCION" value="NEWFACTURA">
+	Selecciona el usuario asociado a la factura: <label for="CREATEFACTURA">
     <select name="CREATEFACTURA">
 	<%
-		while(productoEnumeration.hasMoreElements()){
-		    Producto producto = (Producto) productoEnumeration.nextElement();
-		    out.println(
-		    		"<option value = " + producto.getId() + " " + producto.getNombre() + ">" + producto.getNombre() + "</option>"
-            );
+		while(usuarioEnumeration.hasMoreElements()){
+		    Usuario usuario = (Usuario) usuarioEnumeration.nextElement();
+		    out.println("<option value = " + usuario.getUsername() + ">" + usuario.getUsername() + "</option>");
 		}
 	%>
 	</select>
-	Cantidad: <input type="text" name="STOCK">
-	<input type ="submit" value ="Añadir a factura">
+	<input type ="submit" value ="Crear nueva factura">
 </form><br><br>
 
 <%
@@ -68,54 +68,47 @@ if((msg != null)){
 
 //Usuario usuario = (Usuario) request.getSession().getAttribute("USUARIO");
 String mod = "";
-String del = "";
+String deleteFactura = "", deleteProducto = "";
 
-if(isAdmin){
-	
-	out.println("Se te van a mostrar todas las facturas con sus correspondientes productos");
-	
-	Hashtable<String, ArrayList<Factura>> facturasGlobales = (Hashtable<String, ArrayList<Factura>>) request.getServletContext().getAttribute("FACTURAS");
-	
-	//Hacemos lista con los keys de facturas globales
-	Enumeration facturaEnumeration = facturasGlobales.elements();
-	
-	//Obtenemos las facturas de cada uno
-	while(facturaEnumeration.hasMoreElements()){
-		
-		ArrayList<Factura> facturasIndividuales = (ArrayList<Factura>) facturaEnumeration.nextElement();
 
-		for(Factura factura : facturasIndividuales){
-			
-			out.println("<br><br>ID: " + factura.getId());
-			ArrayList<Producto> productosUsuario = factura.getProductos();
-			for(Producto producto : productosUsuario){
-				out.println("<br>" + producto.getId() + " - " + producto.getNombre());
-			}
-		}
+	
+out.println("<h2>Listado de productos</h2>");
+
+Hashtable<String, Factura> facturas= (Hashtable<String, Factura>) request.getServletContext().getAttribute("FACTURAS");
+Enumeration listaFacturas = facturas.elements();
+String ini = "", end = "";
+
+while(listaFacturas.hasMoreElements()){
+    Factura factura = (Factura) listaFacturas.nextElement();
+    
+	deleteFactura = " [<a href = \"Control?IDACCION=ELIMINARFACTURA&IDFACTURA=" + factura.getId() +"\">Borrar factura</a>]";
+	out.println("<br><br><b>ID: " + factura.getId() + "</b>" + deleteFactura);
+	Hashtable<String, Producto> productosUsuario = factura.getProductos();
+    Enumeration listaProductosUsuario = productosUsuario.elements();
+    
+	while(listaProductosUsuario.hasMoreElements()){
+        Producto producto = (Producto) listaProductosUsuario.nextElement();
+		deleteProducto = " [<a href = \"Control?IDACCION=ELIMINARPRODUCTOFACTURA&IDFACTURA=" + factura.getId() + "&DELETENAME=" + producto.getId() +"\">Borrar producto</a>]";
+		out.println("<br>" + producto.getId() + " - " + producto.getNombre()+ " - " + producto.getStock() + deleteProducto);
+		
 	}
-}
 	
-else{
-	
-	out.println("Se te van a mostrar solo tus facturas con sus correspondientes productos");
-	
-	//usr - arrayFacturasPropias
-	Hashtable<String, ArrayList<Factura>> facturasGlobales = (Hashtable<String, ArrayList<Factura>>) request.getServletContext().getAttribute("FACTURAS");
-	Usuario usuario = (Usuario) request.getSession().getAttribute("USUARIO");
-	String nombre = usuario.getUsername();
-	ArrayList<Factura> facturasIndividuales = facturasGlobales.get(nombre);
-	
-	//Obtenemos las facturas de cada uno
+	ini = "<form action = \"Control\" method = \"post\">" +
+		"<input type = \"hidden\" name=\"IDACCION\" value=\"NEWPRODUCTOFACTURA\">" +
+		"<input type = \"hidden\" name=\"IDFACTURA\" value=" + factura.getId() + ">" +
+		"Producto a añadir: " + "<label for = \"ADDPRODUCTOFACTURA\">" +
+		"<select name = \"ADDPRODUCTOFACTURA\">";
+    end = "</select>" +
+		"<input type =\"submit\" value =\"Añadir producto\">" +
+		"</form>";
 		
-	for(Factura factura : facturasIndividuales){
-		
-		out.println("<br><br>ID: " + factura.getId());
-		ArrayList<Producto> productosUsuario = factura.getProductos();
-		for(Producto producto : productosUsuario){
-			out.println("<br>" + producto.getId() + " - " + producto.getNombre()); 
-		
-		}
+    out.println(ini);
+	while(productoEnumeration.hasMoreElements()){
+	    Producto producto = (Producto) productoEnumeration.nextElement();
+	    out.println("<option value = " + producto.getId() + ">" + producto.getNombre() + "</option>");
 	}
+	out.println(end);
+	
 }
 
 /*

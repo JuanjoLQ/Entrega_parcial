@@ -10,11 +10,13 @@ import javax.servlet.annotation.WebListener;
 import acciones.Accion;
 import acciones.AccionBorrar;
 import acciones.AccionBorrarFacturas;
+import acciones.AccionBorrarProductosFacturas;
 import acciones.AccionBorrarUsuarios;
 import acciones.AccionFacturas;
 import acciones.AccionLogin;
 import acciones.AccionNuevo;
 import acciones.AccionNuevoFacturas;
+import acciones.AccionNuevoProductoFacturas;
 import acciones.AccionNuevoUsuario;
 import acciones.AccionProductos;
 import acciones.AccionUpdate;
@@ -34,8 +36,9 @@ public class ListenerInicio implements ServletContextListener {
 	
 	private Hashtable<String, Usuario> usuarios = null;
 	private Hashtable<String, Producto> productos = null;
-	private Hashtable<String, ArrayList<Factura>> facturas = null;
+	private Hashtable<String, Factura> facturas = null;
 	private Hashtable<String, Accion> acciones = null;
+	private int contador = 0;
 	
     /**
      * Default constructor. 
@@ -59,7 +62,7 @@ public class ListenerInicio implements ServletContextListener {
     	this.usuarios = new Hashtable<String, Usuario>();
     	this.acciones = new Hashtable<String, Accion>();
     	this.productos = new Hashtable<String, Producto>();
-    	this.facturas = new Hashtable<String, ArrayList<Factura>>();
+    	this.facturas = new Hashtable<String, Factura>();
     	
     	this.usuarios.put("admin", new Usuario("admin", "admin", true));
     	this.usuarios.put("Juanjo", new Usuario("Juanjo", "1234"));
@@ -71,9 +74,11 @@ public class ListenerInicio implements ServletContextListener {
     	this.acciones.put("NEW", new AccionNuevo());
     	this.acciones.put("NEWUSER", new AccionNuevoUsuario());
     	this.acciones.put("NEWFACTURA", new AccionNuevoFacturas());
+    	this.acciones.put("NEWPRODUCTOFACTURA", new AccionNuevoProductoFacturas());
     	this.acciones.put("ELIMINAR", new AccionBorrar());
     	this.acciones.put("ELIMINARUSER", new AccionBorrarUsuarios());
     	this.acciones.put("ELIMINARFACTURA", new AccionBorrarFacturas());
+    	this.acciones.put("ELIMINARPRODUCTOFACTURA", new AccionBorrarProductosFacturas());
     	this.acciones.put("UPDATE", new AccionUpdate());
     	this.acciones.put("UPDATEUSER", new AccionUpdateUsuarios());
     	this.acciones.put("UPDATEFACTURA", new AccionUpdateFacturas());
@@ -85,31 +90,27 @@ public class ListenerInicio implements ServletContextListener {
     	this.productos.put("5", new Producto("5", "Kiwi"));
     	this.productos.put("6", new Producto("6", "Mango"));
     	
-    	ArrayList<Producto> productos = new ArrayList<Producto>();
-    	productos.add(new Producto("1", "Manzana"));
-    	productos.add(new Producto("4", "Platano"));
-    	productos.add(new Producto("5", "Kiwi"));
-    	
-    	Factura factura = new Factura("admin_1", productos);
-    	
-    	ArrayList<Producto> productos2 = new ArrayList<Producto>();
-    	productos2.add(new Producto("2", "Mandarina"));
-    	productos2.add(new Producto("6", "Mango"));
-    	productos2.add(new Producto("4", "Platano"));
-    	
-    	Factura factura2 = new Factura("Juanjo_1", productos2);
-    	ArrayList<Factura> facturasUsuario = new ArrayList<Factura>();
-    	facturasUsuario.add(factura);
-    	ArrayList<Factura> facturasUsuario2 = new ArrayList<Factura>();
-    	facturasUsuario2.add(factura2);
-    	facturas.put("admin", facturasUsuario);
-    	facturas.put("Juanjo", facturasUsuario2);
+    	Hashtable<String, Producto> productos = new Hashtable<String, Producto>();
+    	productos.put("1", new Producto("1", "Manzana"));
+    	productos.put("4", new Producto("4", "Platano"));
+    	productos.put("4", new Producto("4", "Platano"));
+    	productos.put("5", new Producto("5", "Kiwi"));
+    	Factura factura = new Factura("admin_x", productos);
+    	facturas.put("admin_x", factura);
+   
+    	Hashtable<String, Producto> productos2 = new Hashtable<String, Producto>();
+    	productos2.put("2", new Producto("2", "Mandarina"));
+    	productos2.put("6", new Producto("6", "Mango"));
+    	productos2.put("4", new Producto("4", "Platano"));
+    	Factura factura2 = new Factura("Juanjo_x", productos2);
+    	facturas.put("Juanjo_x", factura2);
     	
     	sce.getServletContext().setAttribute("PRODUCTOS", this.productos);
     	sce.getServletContext().setAttribute("USUARIOS", this.usuarios);
     	sce.getServletContext().setAttribute("FACTURAS", this.facturas);
     	sce.getServletContext().setAttribute("ACCIONES", this.acciones);
     	
+    	sce.getServletContext().setAttribute("CONTADOR", this.contador);
          System.out.println("Estas en el listener");
     }
 	

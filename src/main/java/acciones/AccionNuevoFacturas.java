@@ -24,6 +24,21 @@ public class AccionNuevoFacturas extends Accion{
 	public String ejecutar(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
 
+		String newId = (String) request.getParameter("CREATEFACTURA");
+		Hashtable<String, Factura> facturas = (Hashtable<String, Factura>) request.getServletContext().getAttribute("FACTURAS");
+		int contador = (int) request.getServletContext().getAttribute("CONTADOR");
+		
+		String idFactura = newId + "_" + contador++;
+		Factura factura = new Factura(idFactura, new Hashtable<String, Producto>());
+		
+		request.getServletContext().setAttribute("CONTADOR", contador);
+		
+		facturas.put(idFactura, factura);
+		
+		request.getServletContext().setAttribute("FACTURAS", facturas);
+		
+		request.getSession().setAttribute("MSG", "Factura Creada");
+		/*
 		String []newFactura = (String[]) request.getParameter("CREATEFACTURA").split(" ");
 		String newStock = (String) request.getParameter("STOCK");
 		
@@ -52,6 +67,7 @@ public class AccionNuevoFacturas extends Accion{
 		else {
 			request.getSession().setAttribute("MSG", "Factura NO Creada");
 		}
+		*/
 		return "crudFacturas.jsp";
 	}
 

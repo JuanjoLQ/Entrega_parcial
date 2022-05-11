@@ -40,14 +40,6 @@ public class AccionLogin extends Accion{
 			
 			if(usuario.getPass().equals(pass)){
 				
-				Hashtable<String, ArrayList<Factura>> facturasGlobales = (Hashtable<String, ArrayList<Factura>>) request.getServletContext().getAttribute("FACTURAS");
-				
-				this.facturasUsuario = facturasGlobales.get(user);
-				
-				if(facturasUsuario == null) {
-					request.getSession().setAttribute("FACTURASUSUARIO", this.facturasUsuario);
-				}
-				
 				request.getSession().setAttribute("USUARIO", new Usuario(user, pass));
 				request.getSession().setAttribute("ISADMIN", usuario.getAdmin());
 				return "crudProductos.jsp";

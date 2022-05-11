@@ -4,6 +4,7 @@ public class Producto {
 	
 	private String id = "";
 	private String nombre = "";
+	private int stock = 1;
 	
 	public Producto(String id, String nombre) {
 		super();
@@ -30,6 +31,20 @@ public class Producto {
 		this.nombre = nombre;
 	}
 
+	public int getStock() {
+		return stock;
+	}
+
+	public void setStock(int stock) {
+		this.stock = stock;
+	}
 	
+	public void addStock(){
+		this.stock++;
+	}
+	
+	public void subStock(){
+		this.stock--;
+	}
 
 }
