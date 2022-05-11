@@ -1,3 +1,6 @@
+<%@page import="pojos.Usuario"%>
+<%@page import="pojos.Factura"%>
+<%@page import="java.util.ArrayList"%>
 <%@page import="java.util.Hashtable"%>
 <%@page import="pojos.Producto"%>
 <%@page import="java.util.Enumeration"%>
@@ -61,7 +64,7 @@ if((msg != null)){
 	out.println(msg + "<br><br>");
 }
 
-/*
+
 
 //Usuario usuario = (Usuario) request.getSession().getAttribute("USUARIO");
 String mod = "";
@@ -69,7 +72,8 @@ String del = "";
 
 if(isAdmin){
 	
-	usr - arrayFacturasPropias
+	out.println("Se te van a mostrar todas las facturas con sus correspondientes productos");
+	
 	Hashtable<String, ArrayList<Factura>> facturasGlobales = (Hashtable<String, ArrayList<Factura>>) request.getServletContext().getAttribute("FACTURAS");
 	
 	//Hacemos lista con los keys de facturas globales
@@ -79,43 +83,42 @@ if(isAdmin){
 	while(facturaEnumeration.hasMoreElements()){
 		
 		ArrayList<Factura> facturasIndividuales = (ArrayList<Factura>) facturaEnumeration.nextElement();
-		
-		for(int i = 0 ; i < facturasIndividuales.size; i++){
-			facturasIndividuales[i].getIdCliente
+
+		for(Factura factura : facturasIndividuales){
 			
-			Factura factura : facturasIndividuales
-            /*
-            *	factura.getIdProducto + factura.getNombreProducto 
-            *
-            *	Nombre factura + bucle con todos los productos
-            *
-            */
-            
-            
-            
-            
-			out.println(producto.getId() + " " + producto.getNombre());  
+			out.println("<br><br>ID: " + factura.getId());
+			ArrayList<Producto> productosUsuario = factura.getProductos();
+			for(Producto producto : productosUsuario){
+				out.println("<br>" + producto.getId() + " - " + producto.getNombre());
+			}
 		}
-		
-		
-		out.println(username);
-		
-		//Mostrar facturas del usuario individual
-		(for each que recorra arrayfacturasUsuario)
-	
 	}
-	
-		
-	
-	
 }
+	
 else{
 	
-    Hashtable<String, Factura> facturasUsuario = (Hashtable<String, Factura>) request.getSession().getAttribute("FACTURASUSUARIO");
-	Enumeration facturaUsuarioEnumeration = facturasUsuario.elements();
+	out.println("Se te van a mostrar solo tus facturas con sus correspondientes productos");
+	
+	//usr - arrayFacturasPropias
+	Hashtable<String, ArrayList<Factura>> facturasGlobales = (Hashtable<String, ArrayList<Factura>>) request.getServletContext().getAttribute("FACTURAS");
+	Usuario usuario = (Usuario) request.getSession().getAttribute("USUARIO");
+	String nombre = usuario.getUsername();
+	ArrayList<Factura> facturasIndividuales = facturasGlobales.get(nombre);
+	
+	//Obtenemos las facturas de cada uno
+		
+	for(Factura factura : facturasIndividuales){
+		
+		out.println("<br><br>ID: " + factura.getId());
+		ArrayList<Producto> productosUsuario = factura.getProductos();
+		for(Producto producto : productosUsuario){
+			out.println("<br>" + producto.getId() + " - " + producto.getNombre()); 
+		
+		}
+	}
 }
 
-
+/*
 
 while(facturaEnumeration.hasMoreElements()){
     Factura factura = (Factura) facturaEnumeration.nextElement();
@@ -139,9 +142,9 @@ for(Producto producto : productoEnumeration.nextElement()){
 	
 }
 
-*/
-/*
 
+
+/*
 out.println("<form method = \"GET\" action = \"HTMLBank\">" + 
     			"<input type = \"text\" name = \"NEWNAME\">" +
     			"<input type = \"submit\" value = \"Modificar\">" +

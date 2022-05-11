@@ -31,13 +31,13 @@ if(isAdmin){
 			"<input type = \"submit\" value = \"Ir a Usuarios\">" +
 			"</form>";
 	out.println(botonUsuarios + "<br>");
-	
-	botonFacturas = "<form action = \"Control\" method = \"post\">" + 
-    		"<input type = \"hidden\" name=\"IDACCION\" value=\"FACTURAS\">" +
-			"<input type = \"submit\" value = \"Ir a Facturas\">" +
-			"</form>";
-	out.println(botonFacturas + "<br>");
 }
+
+botonFacturas = "<form action = \"Control\" method = \"post\">" + 
+		"<input type = \"hidden\" name=\"IDACCION\" value=\"FACTURAS\">" +
+		"<input type = \"submit\" value = \"Ir a Facturas\">" +
+		"</form>";
+out.println(botonFacturas + "<br>");
 
 String msg = (String) request.getSession().getAttribute("MSG");
 

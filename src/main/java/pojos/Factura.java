@@ -1,17 +1,18 @@
 package pojos;
 
-import java.util.Hashtable;
+import java.util.ArrayList;
 
 public class Factura {
 
-	private String id;
-	private Hashtable<String, Producto> productos = null;
+	private String id = "";
+	private ArrayList<Producto> productos = null;
 
 	public Factura() {
 		
 	}
 	
-	public Factura(String id, Hashtable<String, Producto> productos) {
+	public Factura(String id, ArrayList<Producto> productos) {
+		this.id = id;
 		this.productos = productos;
 	}
 	
@@ -23,19 +24,19 @@ public class Factura {
 		this.id = id;
 	}
 
-	public void setProductos(Hashtable<String, Producto> productos) {
+	public void setProductos(ArrayList<Producto> productos) {
 		this.productos = productos;
 	}
 
-	public Hashtable<String, Producto> getProductos(){
+	public ArrayList<Producto> getProductos(){
 		return this.productos;
 	}
 	
 	public void addProducto(Producto producto) {
-		this.productos.put(producto.getId(), producto);
+		this.productos.add(producto);
 	}
 	
 	public void removeProducto(Producto producto) {
-		this.productos.remove(producto.getId());
+		this.productos.remove(producto);
 	}
 }

@@ -14,7 +14,7 @@ import pojos.Usuario;
 
 public class AccionNuevoFacturas extends Accion{
 
-	private Hashtable<String, Producto> productos = new Hashtable<String, Producto>();
+	private ArrayList<Producto> productos = new ArrayList<Producto>();
 
 	public AccionNuevoFacturas() {
 		// TODO Auto-generated constructor stub
@@ -35,9 +35,7 @@ public class AccionNuevoFacturas extends Accion{
 			Usuario user = (Usuario) request.getSession().getAttribute("USUARIO");
 			String nombre = user.getUsername();
 			
-			
-			productos.put(newFactura[0], new Producto(newFactura[0], newFactura[1]));
-			
+			productos.add(new Producto(newFactura[0], newFactura[1]));
 			
 			Factura facturaNueva = new Factura(nombre + "_" + (facturasUsuario.size() + 1), productos);
 			
