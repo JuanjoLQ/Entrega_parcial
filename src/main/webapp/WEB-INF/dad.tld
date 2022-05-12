@@ -1,0 +1,19 @@
+<taglib>
+    <tlib-version>1.0</tlib-version>
+    <jsp-version>1.2</jsp-version>
+    <short-name>lugar</short-name>
+    <uri>mistags</uri>
+    <description>Etiquetas de ejemplo</description>
+	
+    <tag>
+	    <name>lugar</name>
+        <tag-class>tags.Etiqueta</tag-class>
+        <body-content>empty</body-content>
+        <info>Saludo</info>
+        <attribute>
+             <name>nombre</name>
+             <required>false</required>
+        </attribute>
+        
+    </tag>
+</taglib>

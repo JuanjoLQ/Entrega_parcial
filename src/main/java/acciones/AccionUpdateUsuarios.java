@@ -25,10 +25,14 @@ public class AccionUpdateUsuarios extends Accion{
 		String updateUser = (String) request.getParameter("UPDATEUSERNAME");
 		String updatePass = (String) request.getParameter("UPDATEPASS");
 		
+		System.out.println(updateUser);
+		System.out.println(updatePass);
+		
 		System.out.println("class update usuarios");
 		Hashtable<String, Usuario> usuarios = (Hashtable<String, Usuario>) request.getServletContext().getAttribute("USUARIOS");
 		
 		if(usuarios.containsKey(updateUser)) {
+			
 			usuarios.replace(updateUser, new Usuario(updateUser, updatePass));
 			request.getSession().setAttribute("MSG", "Usuario modificado");
 		}

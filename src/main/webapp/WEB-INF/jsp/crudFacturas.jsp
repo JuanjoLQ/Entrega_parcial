@@ -4,6 +4,7 @@
 <%@page import="java.util.Hashtable"%>
 <%@page import="pojos.Producto"%>
 <%@page import="java.util.Enumeration"%>
+<%@ taglib uri="mistags" prefix="dad" %>
 <%@ page language="java" contentType="text/html; charset=ISO-8859-1"
     pageEncoding="ISO-8859-1"%>
 <!DOCTYPE html>
@@ -13,7 +14,7 @@
 <title>Facturas</title>
 </head>
 <body>
-	Estas en el CRUD de facturas.<br><br>
+	<dad:lugar nombre="Facturas"/>
 
 <%
 Boolean isAdmin = (Boolean) request.getSession().getAttribute("ISADMIN");

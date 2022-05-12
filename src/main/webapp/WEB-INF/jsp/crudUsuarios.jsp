@@ -1,6 +1,7 @@
 <%@page import="java.util.Hashtable"%>
 <%@page import="pojos.Usuario"%>
 <%@page import="java.util.Enumeration"%>
+<%@ taglib uri="mistags" prefix="dad" %>
 <%@ page language="java" contentType="text/html; charset=ISO-8859-1"
     pageEncoding="ISO-8859-1"%>
 <!DOCTYPE html>
@@ -10,7 +11,7 @@
 <title>Usuarios</title>
 </head>
 <body>
-Estas en el CRUD de usuarios
+<dad:lugar nombre="Usuarios"/>
 
 
 <br><form action="Control" method="post">
@@ -60,10 +61,11 @@ while(usuarioEnumeration.hasMoreElements()){
     mod = "<form action = \"Control\" method = \"post\">" + 
         		"<input type = \"hidden\" name=\"IDACCION\" value=\"UPDATEUSER\">" +
     			"<input type = \"hidden\" name = \"UPDATEUSERNAME\" value = " + usuario.getUsername() + ">" +
-    			"Contraseña: " + "<input type = \"text\" name = \"UPDATEPASS\">" +
+    			//"Username: " + "<input type = \"text\" required name = \"UPDATEUSERNAME\">" +
+    			"Contraseña: " + "<input type = \"text\" required name = \"UPDATEPASS\">" +
     			"<input type = \"submit\" value = \"Modificar\">" +
     			"</form>";
-    out.println(usuario.getUsername()+ " " + usuario.getPass() + " " + del + mod + "<br>"); 
+    out.println(usuario.getUsername() + " " + usuario.getPass() + " " + del + mod + "<br>"); 
     
 }
 
