@@ -5,8 +5,7 @@ import java.io.IOException;
 import javax.servlet.jsp.JspException;
 import javax.servlet.jsp.tagext.TagSupport;
 
-
-public class Etiqueta extends TagSupport {
+public class EtiquetaUsuario extends TagSupport {
 
 	private static final long serialVersionUID = 1L;
 	private String nombre;
@@ -15,8 +14,9 @@ public class Etiqueta extends TagSupport {
         try{
             if (nombre != null) {
             	
-                pageContext.getOut().print("Te encuentras en la sección de " + nombre);
-            
+                pageContext.getOut().print("Has iniciado sesión como: " + nombre);
+                
+                
             }
         } catch (IOException e) {
             throw new JspException ("Error: IOException" + e.getMessage());
@@ -31,6 +31,5 @@ public class Etiqueta extends TagSupport {
     public void setNombre(String nombre) {
         this.nombre = nombre;
     }
-	
 
 }

@@ -16,4 +16,17 @@
         </attribute>
         
     </tag>
+	
+	<tag>
+	    <name>usuario</name>
+        <tag-class>tags.EtiquetaUsuario</tag-class>
+        <body-content>empty</body-content>
+        <info>Como ha iniciado sesion el usuario y log-out</info>
+        <attribute>
+             <name>nombre</name>
+             <required>false</required>
+        </attribute>
+        
+    </tag>
+	
 </taglib>

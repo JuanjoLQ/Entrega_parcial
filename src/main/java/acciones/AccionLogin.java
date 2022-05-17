@@ -26,7 +26,7 @@ public class AccionLogin extends Accion{
 		
 		String user = (String) request.getParameter("USERNAME");
 		String pass = (String) request.getParameter("PASS");
-		//Si no hay nada debajo maldecir a ECLIPSE :)
+		
 		if(user == null){
 			return "login.jsp";
 		}

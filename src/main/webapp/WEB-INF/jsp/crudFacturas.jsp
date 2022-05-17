@@ -14,7 +14,9 @@
 <title>Facturas</title>
 </head>
 <body>
+	
 	<dad:lugar nombre="Facturas"/>
+	
 
 <%
 Boolean isAdmin = (Boolean) request.getSession().getAttribute("ISADMIN");
@@ -35,7 +37,7 @@ out.println(botonProductos + "<br>");
 
 
 Hashtable<String, Producto> productos = (Hashtable<String, Producto>) request.getServletContext().getAttribute("PRODUCTOS");
-Enumeration productoEnumeration = productos.elements();
+
 
 Hashtable<String, Usuario> usuarios = (Hashtable<String, Usuario>) request.getServletContext().getAttribute("USUARIOS");
 Enumeration usuarioEnumeration = usuarios.elements();
@@ -104,8 +106,9 @@ while(listaFacturas.hasMoreElements()){
 		"</form>";
 		
     out.println(ini);
-	while(productoEnumeration.hasMoreElements()){
-	    Producto producto = (Producto) productoEnumeration.nextElement();
+    Enumeration productoCombo = productos.elements();
+	while(productoCombo.hasMoreElements()){
+	    Producto producto = (Producto) productoCombo.nextElement();
 	    out.println("<option value = " + producto.getId() + ">" + producto.getNombre() + "</option>");
 	}
 	out.println(end);
