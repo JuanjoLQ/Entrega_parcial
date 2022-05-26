@@ -39,18 +39,26 @@ public class FiltroAdmin extends HttpFilter implements Filter {
 		// TODO Auto-generated method stub
 		HttpServletRequest httpRequest = (HttpServletRequest) request;
 		Boolean isAdmin = (Boolean) httpRequest.getSession().getAttribute("ISADMIN");
+		if(isAdmin == null){
+            isAdmin = false;
+            System.out.println("No existe usuario");
+            chain.doFilter(request, response);
+        }
+		String idAccion = (String) httpRequest.getSession().getAttribute("IDACCION");
 		//Obtenemos la accion
-		if((isAdmin == null) || (!isAdmin) /*(if idaccion == Ir a usuarios o modificar usuarios etc... que no entre)*/){
-            System.out.println("No es admin");
-            //Esto no es así
-            chain.doFilter(request, response);
-        }
-		else{
-            System.out.println("Es admin");
-            chain.doFilter(request, response);
-        }
+		System.out.println(isAdmin);
+		if((idAccion == null) || (idAccion.equals("USUARIOS"))){
+			if(isAdmin == false){
+	            System.out.println("No es admin");
+	            request.getRequestDispatcher("WEB-INF/jsp/crudProductos.jsp").forward(request, response);
+	        }
+			else{
+	            System.out.println("Es admin");
+	            chain.doFilter(request, response);
+	        }
 		// pass the request along the filter chain
-		
+		}
+		chain.doFilter(request, response);
 	}
 
 	/**

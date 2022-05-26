@@ -19,7 +19,7 @@
 	<input type = "hidden" name="IDACCION" value="NEWUSER">
 	Nombre del usuario: <input type="text" name="NEWUSERNAME">
 	Contraseña del usuario: <input type="text" name="NEWPASS">
-	<input type="checkbox" name="STATE">
+	¿Admin?<input type="checkbox" name="STATE">
 	<input type ="submit" value ="Crear">
 </form><br><br>
 
