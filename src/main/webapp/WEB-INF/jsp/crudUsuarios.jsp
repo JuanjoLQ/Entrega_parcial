@@ -19,8 +19,11 @@
 	<input type = "hidden" name="IDACCION" value="NEWUSER">
 	Nombre del usuario: <input type="text" name="NEWUSERNAME">
 	Contraseña del usuario: <input type="text" name="NEWPASS">
+	<input type="checkbox" name="STATE">
 	<input type ="submit" value ="Crear">
 </form><br><br>
+
+
 
 <%
 
@@ -65,7 +68,7 @@ while(usuarioEnumeration.hasMoreElements()){
     			"Contraseña: " + "<input type = \"text\" required name = \"UPDATEPASS\">" +
     			"<input type = \"submit\" value = \"Modificar\">" +
     			"</form>";
-    out.println(usuario.getUsername() + " " + usuario.getPass() + " " + del + mod + "<br>"); 
+    out.println(usuario.getUsername() + " " + usuario.getPass() + " " + usuario.getAdmin() + " " + del + mod + "<br>"); 
     
 }
 

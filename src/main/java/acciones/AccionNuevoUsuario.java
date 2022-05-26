@@ -21,6 +21,8 @@ public class AccionNuevoUsuario extends Accion{
 
 		String newUsername = (String) request.getParameter("NEWUSERNAME");
 		String newPass = (String) request.getParameter("NEWPASS");
+		String State = (String) request.getParameter("STATE"); // on/null -- checked/no checked
+		
 		
 		Hashtable<String, Usuario> usuarios = (Hashtable<String, Usuario>) request.getServletContext().getAttribute("USUARIOS");
 		
@@ -31,9 +33,18 @@ public class AccionNuevoUsuario extends Accion{
 				
 			}
 			else {
+				
+				if(State != null) {
+					usuarios.put(newUsername, new Usuario(newUsername, newPass, true));
+					request.getSession().setAttribute("MSG", "Usuario Admin Creado");
+					
+				}else {
 
-				usuarios.put(newUsername, new Usuario(newUsername, newPass));
-				request.getSession().setAttribute("MSG", "Usuario Creado");
+					usuarios.put(newUsername, new Usuario(newUsername, newPass));
+					request.getSession().setAttribute("MSG", "Usuario Creado");
+					
+					
+				}
 				
 			}
 			
