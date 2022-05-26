@@ -1,7 +1,7 @@
 <%@page import="java.util.Hashtable"%>
 <%@page import="pojos.Producto"%>
 <%@page import="java.util.Enumeration"%>
-<%@ taglib uri="mistags" prefix="dad" %>
+<%@ taglib uri="http://java.sun.com/jstl/core_rt" prefix="dad" %>
 <%@ page language="java" contentType="text/html; charset=ISO-8859-1"
     pageEncoding="ISO-8859-1"%>
 <!DOCTYPE html>
@@ -11,8 +11,12 @@
 <title>Productos</title>
 </head>
 <body>
-    
-<dad:lugar nombre="Productos"/>
+   
+<%
+String user = (String) request.getSession().getAttribute("USERNAME");
+%>   
+   
+<dad:lugar nombre="${user}"/> 
 
 <br><form action="Control" method="post">
 
@@ -40,7 +44,7 @@ botonFacturas = "<form action = \"Control\" method = \"post\">" +
 		"</form>";
 out.println(botonFacturas + "<br>");
 
-String msg = (String) request.getSession().getAttribute("MSG");
+String msg = (String) request.getAttribute("MSG");
 
 if((msg != null)){
 	out.println(msg + "<br><br>");
@@ -69,6 +73,7 @@ while(productoEnumeration.hasMoreElements()){
 
 
 /*
+
 for(Producto producto : productoEnumeration.nextElement()){
 	
 	out.println(producto.getId() + " " + producto.getNombre());  

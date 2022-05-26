@@ -9,9 +9,9 @@ import javax.servlet.http.HttpServletResponse;
 
 import pojos.Producto;
 
-public class AccionNuevo extends Accion{
+public class AccionNuevoProducto extends Accion{
 
-	public AccionNuevo() {
+	public AccionNuevoProducto() {
 		// TODO Auto-generated constructor stub
 	}
 
@@ -31,13 +31,13 @@ public class AccionNuevo extends Accion{
 			else {
 
 				productos.put(newId, new Producto(newId, newNombre));
-				request.getSession().setAttribute("MSG", "Producto Creado");
+				request.setAttribute("MSG", "Producto Creado");
 				
 			}
 			
 		}
 		else {
-			request.getSession().setAttribute("MSG", "Producto NO Creado");
+			request.setAttribute("MSG", "Producto NO Creado");
 			
 		}
 		return "crudProductos.jsp";

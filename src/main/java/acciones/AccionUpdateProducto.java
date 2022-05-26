@@ -9,9 +9,9 @@ import javax.servlet.http.HttpServletResponse;
 
 import pojos.Producto;
 
-public class AccionUpdate extends Accion{
+public class AccionUpdateProducto extends Accion{
 
-	public AccionUpdate() {
+	public AccionUpdateProducto() {
 		// TODO Auto-generated constructor stub
 	}
 
@@ -26,10 +26,10 @@ public class AccionUpdate extends Accion{
 		
 		if(productos.containsKey(updateId)) {
 			productos.replace(updateId, new Producto(updateId, updateName));
-			request.getSession().setAttribute("MSG", "Producto modificado");
+			request.setAttribute("MSG", "Producto modificado");
 		}
 		else {
-			request.getSession().setAttribute("MSG", "Producto NO modificado");
+			request.setAttribute("MSG", "Producto NO modificado");
 		}
 		
 		return "crudProductos.jsp";

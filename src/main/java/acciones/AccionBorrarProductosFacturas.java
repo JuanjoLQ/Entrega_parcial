@@ -33,11 +33,11 @@ public class AccionBorrarProductosFacturas extends Accion{
 			factura.removeProducto(deleteName);
 
 			request.getServletContext().setAttribute("FACTURAS", facturas);
-			request.getSession().setAttribute("MSG", "Producto eliminado.");
+			request.setAttribute("MSG", "Producto eliminado.");
 			
 		}
 		else {
-			request.getSession().setAttribute("MSG", "Producto NO eliminado.");
+			request.setAttribute("MSG", "Producto NO eliminado.");
 		}
 		
 		/*

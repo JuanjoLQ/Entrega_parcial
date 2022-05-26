@@ -9,9 +9,9 @@ import javax.servlet.http.HttpServletResponse;
 
 import pojos.Producto;
 
-public class AccionBorrar extends Accion{
+public class AccionBorrarProductos extends Accion{
 
-	public AccionBorrar() {
+	public AccionBorrarProductos() {
 		// TODO Auto-generated constructor stub
 	}
 
@@ -24,10 +24,10 @@ public class AccionBorrar extends Accion{
 		
 		if(productos.containsKey(deleteName)) {
 			productos.remove(deleteName);
-			request.getSession().setAttribute("MSG", "Producto eliminado");
+			request.setAttribute("MSG", "Producto eliminado");
 		}
 		else {
-			request.getSession().setAttribute("MSG", "Producto NO eliminado");
+			request.setAttribute("MSG", "Producto NO eliminado");
 		}
 		
 		return "crudProductos.jsp";

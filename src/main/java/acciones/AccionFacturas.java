@@ -15,7 +15,7 @@ public class AccionFacturas extends Accion{
 	@Override
 	public String ejecutar(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
-		request.getSession().setAttribute("MSG", null);
+		request.setAttribute("MSG", null);
 		return "crudFacturas.jsp";
 	}
 

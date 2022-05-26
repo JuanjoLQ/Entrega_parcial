@@ -29,19 +29,19 @@ public class AccionNuevoUsuario extends Accion{
 		if(newUsername != null && newPass != null) {
 			
 			if(usuarios.containsKey(newUsername)) {
-				request.getSession().setAttribute("MSG", "Nombre ya existente.");
+				request.setAttribute("MSG", "Nombre ya existente.");
 				
 			}
 			else {
 				
 				if(State != null) {
 					usuarios.put(newUsername, new Usuario(newUsername, newPass, true));
-					request.getSession().setAttribute("MSG", "Usuario Admin Creado");
+					request.setAttribute("MSG", "Usuario Admin Creado");
 					
 				}else {
 
 					usuarios.put(newUsername, new Usuario(newUsername, newPass));
-					request.getSession().setAttribute("MSG", "Usuario Creado");
+					request.setAttribute("MSG", "Usuario Creado");
 					
 					
 				}
@@ -50,7 +50,7 @@ public class AccionNuevoUsuario extends Accion{
 			
 		}
 		else {
-			request.getSession().setAttribute("MSG", "Usuario NO Creado");
+			request.setAttribute("MSG", "Usuario NO Creado");
 			
 		}
 		return "crudUsuarios.jsp";

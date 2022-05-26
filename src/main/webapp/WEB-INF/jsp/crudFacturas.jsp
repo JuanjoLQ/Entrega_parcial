@@ -61,7 +61,7 @@ Enumeration usuarioEnumeration = usuarios.elements();
 
 <%
 
-String msg = (String) request.getSession().getAttribute("MSG");
+String msg = (String) request.getAttribute("MSG");
 
 if((msg != null)){
 	out.println(msg + "<br><br>");

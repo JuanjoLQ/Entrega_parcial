@@ -24,20 +24,24 @@ public class AccionUpdateUsuarios extends Accion{
 		
 		String updateUser = (String) request.getParameter("UPDATEUSERNAME");
 		String updatePass = (String) request.getParameter("UPDATEPASS");
+		String updateAdmin = (String) request.getParameter("UPDATEADMIN");
 		
-		System.out.println(updateUser);
-		System.out.println(updatePass);
 		
-		System.out.println("class update usuarios");
 		Hashtable<String, Usuario> usuarios = (Hashtable<String, Usuario>) request.getServletContext().getAttribute("USUARIOS");
-		
+		System.out.println("Esto que es -->" + updateAdmin);
 		if(usuarios.containsKey(updateUser)) {
+			if(updateAdmin.equalsIgnoreCase("true")) {
+				usuarios.replace(updateUser, new Usuario(updateUser, updatePass, true));
+			}
+			else {
+				usuarios.replace(updateUser, new Usuario(updateUser, updatePass));
+			}
 			
-			usuarios.replace(updateUser, new Usuario(updateUser, updatePass));
-			request.getSession().setAttribute("MSG", "Usuario modificado");
+			
+			request.setAttribute("MSG", "Usuario modificado");
 		}
 		else {
-			request.getSession().setAttribute("MSG", "Usuario NO modificado");
+			request.setAttribute("MSG", "Usuario NO modificado");
 		}
 		
 		return "crudUsuarios.jsp";

@@ -31,7 +31,6 @@ public class AccionLogin extends Accion{
 			return "login.jsp";
 		}
 		
-		
 		Hashtable<String, Usuario> usuarios = (Hashtable<String, Usuario>) request.getServletContext().getAttribute("USUARIOS");
 		
 		if(usuarios.containsKey(user)) {
@@ -42,6 +41,7 @@ public class AccionLogin extends Accion{
 				
 				request.getSession().setAttribute("USUARIO", new Usuario(user, pass));
 				request.getSession().setAttribute("ISADMIN", usuario.getAdmin());
+				request.getSession().setAttribute("USERNAME", user);
 				return "crudProductos.jsp";
 			}
 			else {

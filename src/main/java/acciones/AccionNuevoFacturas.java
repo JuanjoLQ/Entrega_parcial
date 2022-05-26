@@ -37,7 +37,7 @@ public class AccionNuevoFacturas extends Accion{
 		
 		request.getServletContext().setAttribute("FACTURAS", facturas);
 		
-		request.getSession().setAttribute("MSG", "Factura Creada");
+		request.setAttribute("MSG", "Factura Creada");
 		/*
 		String []newFactura = (String[]) request.getParameter("CREATEFACTURA").split(" ");
 		String newStock = (String) request.getParameter("STOCK");

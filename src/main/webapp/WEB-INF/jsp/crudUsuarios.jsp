@@ -44,7 +44,7 @@ botonFacturas = "<form action = \"Control\" method = \"post\">" +
 			"</form>";
 	out.println(botonFacturas + "<br>");
 
-String msg = (String) request.getSession().getAttribute("MSG");
+String msg = (String) request.getAttribute("MSG");
 
 if((msg != null)){
 	out.println(msg + "<br><br>");
@@ -66,6 +66,7 @@ while(usuarioEnumeration.hasMoreElements()){
     			"<input type = \"hidden\" name = \"UPDATEUSERNAME\" value = " + usuario.getUsername() + ">" +
     			//"Username: " + "<input type = \"text\" required name = \"UPDATEUSERNAME\">" +
     			"Contraseña: " + "<input type = \"text\" required name = \"UPDATEPASS\">" +
+    			"<input type = \"hidden\" name = \"UPDATEADMIN\" value = " + usuario.getAdmin() + ">" +
     			"<input type = \"submit\" value = \"Modificar\">" +
     			"</form>";
     out.println(usuario.getUsername() + " " + usuario.getPass() + " " + usuario.getAdmin() + " " + del + mod + "<br>"); 

@@ -25,10 +25,10 @@ public class AccionBorrarUsuarios extends Accion{
 		
 		if(usuarios.containsKey(deleteUser)) {
 			usuarios.remove(deleteUser);
-			request.getSession().setAttribute("MSG", "Usuario eliminado");
+			request.setAttribute("MSG", "Usuario eliminado");
 		}
 		else {
-			request.getSession().setAttribute("MSG", "Usuario NO eliminado");
+			request.setAttribute("MSG", "Usuario NO eliminado");
 		}
 		
 		return "crudUsuarios.jsp";

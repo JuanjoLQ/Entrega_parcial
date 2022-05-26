@@ -29,11 +29,11 @@ public class AccionBorrarFacturas extends Accion{
 			facturas.remove(idFactura);
 			
 			request.getServletContext().setAttribute("FACTURAS", facturas);
-			request.getSession().setAttribute("MSG", "Factura eliminada.");
+			request.setAttribute("MSG", "Factura eliminada.");
 			
 		}
 		else {
-			request.getSession().setAttribute("MSG", "Factura NO eliminada.");
+			request.setAttribute("MSG", "Factura NO eliminada.");
 		}
 		return "crudFacturas.jsp";
 	}

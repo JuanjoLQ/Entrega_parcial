@@ -15,10 +15,10 @@ import javax.websocket.Session;
 import org.apache.tomcat.util.http.fileupload.RequestContext;
 
 import acciones.Accion;
-import acciones.AccionBorrar;
+import acciones.AccionBorrarProductos;
 import acciones.AccionLogin;
-import acciones.AccionNuevo;
-import acciones.AccionUpdate;
+import acciones.AccionNuevoProducto;
+import acciones.AccionUpdateProducto;
 import pojos.Producto;
 import pojos.Usuario;
 import pojos.Factura;

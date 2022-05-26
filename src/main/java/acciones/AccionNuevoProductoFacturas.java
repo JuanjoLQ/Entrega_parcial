@@ -40,7 +40,7 @@ public class AccionNuevoProductoFacturas extends Accion{
 		}
 		
 		request.getServletContext().setAttribute("FACTURAS", facturas);
-		request.getSession().setAttribute("MSG", "Producto insertado correctamente.");
+		request.setAttribute("MSG", "Producto insertado correctamente.");
 		
 		return "crudFacturas.jsp";
 	}
