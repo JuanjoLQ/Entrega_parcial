@@ -1,7 +1,8 @@
 <%@page import="java.util.Hashtable"%>
 <%@page import="pojos.Producto"%>
+<%@ page import="java.util.*"%>
 <%@page import="java.util.Enumeration"%>
-<%@ taglib uri="http://java.sun.com/jstl/core_rt" prefix="dad" %>
+<%@ taglib uri="mistags" prefix="dad" %>
 <%@ page language="java" contentType="text/html; charset=ISO-8859-1"
     pageEncoding="ISO-8859-1"%>
 <!DOCTYPE html>
@@ -14,9 +15,10 @@
    
 <%
 String user = (String) request.getSession().getAttribute("USERNAME");
-%>   
-   
-<dad:lugar nombre="${user}"/> 
+%>
+
+<dad:lugar nombre="Productos"/>
+
 
 <br><form action="Control" method="post">
 

@@ -10,6 +10,7 @@ import javax.servlet.ServletResponse;
 import javax.servlet.annotation.WebFilter;
 import javax.servlet.http.HttpFilter;
 import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
 
 /**
  * Servlet Filter implementation class FiltroAdmin
@@ -38,27 +39,31 @@ public class FiltroAdmin extends HttpFilter implements Filter {
 	public void doFilter(ServletRequest request, ServletResponse response, FilterChain chain) throws IOException, ServletException {
 		// TODO Auto-generated method stub
 		HttpServletRequest httpRequest = (HttpServletRequest) request;
+		HttpServletResponse httpResponse = (HttpServletResponse) response;
 		Boolean isAdmin = (Boolean) httpRequest.getSession().getAttribute("ISADMIN");
 		if(isAdmin == null){
+			System.out.println(isAdmin);
             isAdmin = false;
             System.out.println("No existe usuario");
             chain.doFilter(request, response);
         }
-		String idAccion = (String) httpRequest.getSession().getAttribute("IDACCION");
-		//Obtenemos la accion
-		System.out.println(isAdmin);
-		if((idAccion == null) || (idAccion.equals("USUARIOS"))){
-			if(isAdmin == false){
-	            System.out.println("No es admin");
-	            request.getRequestDispatcher("WEB-INF/jsp/crudProductos.jsp").forward(request, response);
-	        }
-			else{
-	            System.out.println("Es admin");
-	            chain.doFilter(request, response);
-	        }
-		// pass the request along the filter chain
+        else{
+			String idAccion = (String) httpRequest.getSession().getAttribute("IDACCION");
+			//Obtenemos la accion
+			System.out.println(isAdmin);
+			if((idAccion == null) || (idAccion.equals("USUARIOS"))){
+				if(isAdmin == false){
+		            System.out.println("No es admin");
+		            httpResponse.sendRedirect("WEB-INF/jsp/crudProductos.jsp");
+		            //request.getRequestDispatcher("WEB-INF/jsp/crudProductos.jsp").forward(httpRequest, httpResponse);
+		        }
+				else{
+		            System.out.println("Es admin");
+		            chain.doFilter(request, response);
+		        }
+			// pass the request along the filter chain
+			}
 		}
-		chain.doFilter(request, response);
 	}
 
 	/**

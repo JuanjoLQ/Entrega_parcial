@@ -2,7 +2,7 @@
     <tlib-version>1.0</tlib-version>
     <jsp-version>1.2</jsp-version>
     <short-name>lugar</short-name>
-    <uri>http://java.sun.com/jstl/core_rt</uri>
+    <uri>mistags</uri>
     <description>Etiquetas de ejemplo</description>
 	
     <tag>

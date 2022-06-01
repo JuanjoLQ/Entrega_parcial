@@ -16,6 +16,8 @@ public class AccionProductos extends Accion{
 	public String ejecutar(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
 		request.setAttribute("MSG", null);
+		String message = "Estas en productos";
+		request.setAttribute("user", message);
 		return "crudProductos.jsp";
 	}
 
