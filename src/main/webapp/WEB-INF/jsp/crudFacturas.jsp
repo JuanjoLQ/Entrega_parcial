@@ -4,6 +4,7 @@
 <%@page import="java.util.Hashtable"%>
 <%@page import="pojos.Producto"%>
 <%@page import="java.util.Enumeration"%>
+<%@ taglib uri="http://tiles.apache.org/tags-tiles" prefix="tiles" %>
 <%@ taglib uri="mistags" prefix="dad" %>
 <%@ page language="java" contentType="text/html; charset=ISO-8859-1"
     pageEncoding="ISO-8859-1"%>
@@ -15,12 +16,26 @@
 </head>
 <body>
 	
-	<dad:lugar nombre="Facturas"/>
+<tiles:insertDefinition name="banner.facturas" />
 	
-
 <%
+System.out.println("Estas en facturas");
 Boolean isAdmin = (Boolean) request.getSession().getAttribute("ISADMIN");
+
+if(isAdmin){
+    %>
+	<dad:admin nombre="administrador"/>
+	<%
+}
+else{
+    %>
+    <dad:admin nombre="no administrador"/>
+    <%
+}
+
 String botonUsuarios, botonProductos;
+
+
 if(isAdmin){
 	botonUsuarios = "<form action = \"Control\" method = \"post\">" + 
     		"<input type = \"hidden\" name=\"IDACCION\" value=\"USUARIOS\">" +

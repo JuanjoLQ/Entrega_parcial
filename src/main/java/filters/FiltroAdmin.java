@@ -37,9 +37,29 @@ public class FiltroAdmin extends HttpFilter implements Filter {
 	 * @see Filter#doFilter(ServletRequest, ServletResponse, FilterChain)
 	 */
 	public void doFilter(ServletRequest request, ServletResponse response, FilterChain chain) throws IOException, ServletException {
+        
 		// TODO Auto-generated method stub
 		HttpServletRequest httpRequest = (HttpServletRequest) request;
 		HttpServletResponse httpResponse = (HttpServletResponse) response;
+		String idAccion = (String) httpRequest.getSession().getAttribute("IDACCION");
+		String peticionAccion = (String) httpRequest.getParameter("IDACCION");
+		System.out.println("ESTAS EN FILTRO -->" + idAccion + " Peticion --> " + peticionAccion);
+		if("USUARIOS".equalsIgnoreCase(idAccion) || "USUARIOS".equalsIgnoreCase(peticionAccion)){
+            Boolean isAdmin = (Boolean) httpRequest.getSession().getAttribute("ISADMIN");
+            System.out.println("ADMIN -->" + isAdmin);
+            if(isAdmin){
+                chain.doFilter(request, response);
+            }
+            else{
+                //httpResponse.sendRedirect("WEB-INF/jsp/crudProductos.jsp");
+                request.getRequestDispatcher("WEB-INF/jsp/crudProductos.jsp").forward(httpRequest, httpResponse);
+                return;
+            }
+        }
+        else{
+            chain.doFilter(request, response);
+        }
+		/*
 		Boolean isAdmin = (Boolean) httpRequest.getSession().getAttribute("ISADMIN");
 		if(isAdmin == null){
 			System.out.println(isAdmin);
@@ -63,7 +83,12 @@ public class FiltroAdmin extends HttpFilter implements Filter {
 		        }
 			// pass the request along the filter chain
 			}
+			else{
+                chain.doFilter(request, response);
+            }
 		}
+		*/
+		
 	}
 
 	/**

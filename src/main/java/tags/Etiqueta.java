@@ -15,7 +15,7 @@ public class Etiqueta extends TagSupport {
         try{
             if (nombre != null) {
             	
-                pageContext.getOut().print("Te encuentras en la sección de " + nombre);
+                pageContext.getOut().print("Te encuentras en: " + nombre);
             
             }
         } catch (IOException e) {

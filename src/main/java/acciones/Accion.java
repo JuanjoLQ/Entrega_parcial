@@ -1,11 +1,18 @@
 package acciones;
 
-import java.io.IOException;
-import java.net.http.HttpResponse;
+import java.util.Enumeration;
+import java.util.Properties;
 
-import javax.servlet.ServletException;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+
+import org.apache.tiles.Attribute;
+import org.apache.tiles.AttributeContext;
+import org.apache.tiles.TilesContainer;
+import org.apache.tiles.servlet.context.ServletUtil;
+
+import java.io.IOException;
+import javax.servlet.ServletException;
 
 public abstract class Accion {
 

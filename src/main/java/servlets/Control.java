@@ -70,10 +70,9 @@ public class Control extends HttpServlet {
 			if("LOGIN".equals(parameterAccion)) {
 				Accion accion = new AccionLogin();
 				jsp += accion.ejecutar(request, response);
-				
+				//accion.ejecutar(request, response);
 			}
 			else {
-
 				jsp += "login.jsp";
 			}
 			

@@ -2,6 +2,7 @@
 <%@page import="pojos.Producto"%>
 <%@ page import="java.util.*"%>
 <%@page import="java.util.Enumeration"%>
+<%@ taglib uri="http://tiles.apache.org/tags-tiles" prefix="tiles" %>
 <%@ taglib uri="mistags" prefix="dad" %>
 <%@ page language="java" contentType="text/html; charset=ISO-8859-1"
     pageEncoding="ISO-8859-1"%>
@@ -13,11 +14,22 @@
 </head>
 <body>
    
+<tiles:insertDefinition name="banner.productos" />
+
 <%
-String user = (String) request.getSession().getAttribute("USERNAME");
+Boolean isAdmin = (Boolean) request.getSession().getAttribute("ISADMIN");
+if(isAdmin){
+    %>
+	<dad:admin nombre="administrador"/>
+	<%
+}
+else{
+    %>
+    <dad:admin nombre="no administrador"/>
+    <%
+}
 %>
 
-<dad:lugar nombre="Productos"/>
 
 
 <br><form action="Control" method="post">
@@ -30,7 +42,6 @@ String user = (String) request.getSession().getAttribute("USERNAME");
 
 <%
 
-Boolean isAdmin = (Boolean) request.getSession().getAttribute("ISADMIN");
 String botonUsuarios, botonFacturas;
 if(isAdmin){
 	botonUsuarios = "<form action = \"Control\" method = \"post\">" + 

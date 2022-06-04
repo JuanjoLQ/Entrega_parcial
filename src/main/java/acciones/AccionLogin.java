@@ -23,7 +23,6 @@ public class AccionLogin extends Accion{
 	@Override
 	public String ejecutar(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		
-		
 		String user = (String) request.getParameter("USERNAME");
 		String pass = (String) request.getParameter("PASS");
 		

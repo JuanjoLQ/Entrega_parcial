@@ -1,5 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=ISO-8859-1"
     pageEncoding="ISO-8859-1"%>
+    <%@ taglib uri="http://tiles.apache.org/tags-tiles" prefix="tiles" %>
 <%@ taglib uri="mistags" prefix="dad" %>
 <!DOCTYPE html>
 <html>
@@ -8,18 +9,20 @@
 <title>Insert title here</title>
 </head>
 <body>
-<dad:lugar nombre="login"/>
 
-	
+<tiles:insertDefinition name="banner.login" />
+
 <form action = "Control" method = "post">
 
 	<input type="hidden" name="IDACCION" value="LOGIN">
 	Usuario: <input type="text" name="USERNAME">
-	Contraseña: <input type="text" name="PASS">
+	Contrasena: <input type="text" name="PASS">
 	<input type="submit" value="Entrar">
 
 
 </form>
+
+
 
 
 

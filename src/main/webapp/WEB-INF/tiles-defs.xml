@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="ISO-8859-1" ?>
+<!DOCTYPE tiles-definitions PUBLIC
+       "-//Apache Software Foundation//DTD Tiles Configuration 2.1//EN"
+       "http://tiles.apache.org/dtds/tiles-config_2_1.dtd">
+<tiles-definitions>
+  	<definition name="banner.login" template="/WEB-INF/jsp/layouts/onlybanner.jsp">
+	    <put-attribute name="title" value="Login" />
+	    <put-attribute name="banner" value="/WEB-INF/jsp/tiles/bannerLogin.jsp" />
+	</definition>
+	
+	<definition name="banner.productos" template="/WEB-INF/jsp/layouts/onlybanner.jsp">
+	    <put-attribute name="title" value="Productos" />
+	    <put-attribute name="banner" value="/WEB-INF/jsp/tiles/bannerProductos.jsp" />
+	</definition>
+	
+	<definition name="banner.usuarios" template="/WEB-INF/jsp/layouts/onlybanner.jsp">
+	    <put-attribute name="title" value="Usuarios" />
+	    <put-attribute name="banner" value="/WEB-INF/jsp/tiles/bannerUsuarios.jsp" />
+	</definition>
+	
+	<definition name="banner.facturas" template="/WEB-INF/jsp/layouts/onlybanner.jsp">
+	    <put-attribute name="title" value="Facturas" />
+	    <put-attribute name="banner" value="/WEB-INF/jsp/tiles/bannerFacturas.jsp" />
+	</definition>
+</tiles-definitions>

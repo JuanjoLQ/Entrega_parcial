@@ -1,6 +1,7 @@
 <%@page import="java.util.Hashtable"%>
 <%@page import="pojos.Usuario"%>
 <%@page import="java.util.Enumeration"%>
+<%@ taglib uri="http://tiles.apache.org/tags-tiles" prefix="tiles" %>
 <%@ taglib uri="mistags" prefix="dad" %>
 <%@ page language="java" contentType="text/html; charset=ISO-8859-1"
     pageEncoding="ISO-8859-1"%>
@@ -11,14 +12,29 @@
 <title>Usuarios</title>
 </head>
 <body>
-<dad:lugar nombre="Usuarios"/>
+
+<tiles:insertDefinition name="banner.usuarios" />
+
+<%
+Boolean isAdmin = (Boolean) request.getSession().getAttribute("ISADMIN");
+if(isAdmin){
+    %>
+	<dad:admin nombre="administrador"/>
+	<%
+}
+else{
+    %>
+    <dad:admin nombre="no administrador"/>
+    <%
+}
+%>
 
 
 <br><form action="Control" method="post">
 
 	<input type = "hidden" name="IDACCION" value="NEWUSER">
-	Nombre del usuario: <input type="text" name="NEWUSERNAME">
-	Contraseña del usuario: <input type="text" name="NEWPASS">
+	Nombre del usuario: <input type="text" required name="NEWUSERNAME">
+	Contraseña del usuario: <input type="text" required name="NEWPASS">
 	¿Admin?<input type="checkbox" name="STATE">
 	<input type ="submit" value ="Crear">
 </form><br><br>
@@ -26,8 +42,6 @@
 
 
 <%
-
-Boolean isAdmin = (Boolean) request.getSession().getAttribute("ISADMIN");
 String botonProductos, botonFacturas;
 if(isAdmin){
 	botonProductos = "<form action = \"Control\" method = \"post\">" + 
